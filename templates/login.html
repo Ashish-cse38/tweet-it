@@ -1,0 +1,20 @@
+{% load bootstrap3 %}
+
+{% if user and not user.is_anonymous %}
+  <a><b>Hello, {{ user.get_full_name }}!</b></a>
+  <br>
+  <div class="tweets-section">
+	{% for tweet in tweets %}
+           <div>
+             <div class="summary" style="background-color:yellow">{{ tweet.text }}</div><br>
+           </div>
+         {% endfor %}
+</div>
+  <BUTTON>
+  	<a href="/logout">Logout</a>
+  </BUTTON>
+{% else %}
+  <BUTTON>
+  	<a href="{% url 'social:begin' 'twitter' %}?next={{ request.path }}">Login with Twitter</a>
+  </BUTTON>
+{% endif %}
